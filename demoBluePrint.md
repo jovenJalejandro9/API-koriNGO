@@ -4,147 +4,96 @@ FORMAT: 1A
 
 This is an App to make the management of the sponsorship cards of the NGO Koricancha (www.koricancha.org) easier. The App also will ease the visits of the volunteers who are goin to create or update one of these cards
 
+# Group Users
+Here is every resource related with the users
 
-# User [/users/{user_id}]
+## User [/users/{user_id}]
 
-A User object has the following attributes:
-
-    + name
-    + first_surname
-    + second_surname
-    + nickname
-    + password
-    + email
-    + birthday
-    + studies - Collection of the studies
-    + porfession  - Collection of different professions
-    + previous_volunteering - Collection of different volunteering
-    + published_at - An ISO8601 date when the user is created
-    + rol - Admin or user(normal user)
-//    + url
 
 + Parameters
-    + question_id: 1 (required, number) - ID of the User in form of an integer
+  + question_id: 1 (required, number) - ID of the User in form of an integer
 
-## View Users Detail [GET]
++Attributes(object)
+  + id_user: 1 (number, requiered)
+  + name: Sonia (string,required)
+  + first_surname: Lolo (string,required)
+  + second_surname: Aria (string,required)
+  + nickname: Sonya (string,required)
+  + password: katuwira (password,required)
+  + email: sonialolo@gmail.com: (email,required)
+  + birthday: 1984-01-12 (date,required)
+  + studies: ["journalism","psychology"] (array[string]) - Collection of the studies 
+  + porfessions: ["teacher","psychologist"] (array[string]) - Collection of different professions
+  + previous_volunteering: ["AMI3"] (array[string]) - Collection of different volunteering
+  + published_at: 2016-03-05 (string, required) - An ISO8601 date when the user is created
+  + rol: user (string,required) - Admin or user(normal user)
+
+### View Users Detail [GET]
+Retrieve a user with the given id
 
 + Response 200 (application/json)
+    + Attributes (User)
 
-  {
-    "name": "Sonia",
-    "first_surname": "Lolo"
-    "second_surname": "Aira"
-    "nickname": "Sonya"
-//    "password": "katuwira"
-    "email": "soniaLolo@gmail.com"
-    "birthday": "1984-01-12"
-    "studies": ["social work"]
-    "professions" : ["teacher", "psychologist"]
-    "previous_volunteering": "AMI3"
-    "published_at": "2018-11-11T08:40:51.620Z",
- //   "url": "/questions/1",
-    "rol": "admin"
-  }
+## Users[/users{?limit}]
+A resource representing all of my Users in the system.
 
-//que es la page??
-# Users Collection [/users{?page}]
++ Attributes(array[User])
 
-// Ver si hace falta hacer la coleccion 
+### List All Users [GET]
+Return a list of your users
+
 + Parameters
-    + page: 1 (optional, number) - The page of questions to return
+  + limit (number, optional) - The maximum number of results to return.
 
+      A limit on the number of objects to be returned. Limit can range
+      between 1 and the total size.
 
-## List All Users [GET]
-//Que son los headers del 
+      + Default: '20'
+
 + Response 200 (application/json)
-  + Headers
-    Link: </questions?page=2>; rel="next"
-  + Body
-    [
-      {
-        "name": "Sonia",
-        "first_surname": "Lolo"
-        "second_surname": "Aira"
-        "nickname": "Sonya"
-    //    "password": "katuwira"
-        "email": "soniaLolo@gmail.com"
-        "birthday": "1984-01-12"
-        "studies": ["social work"]
-        "professions" : ["teacher", "psychologist"]
-        "previous_volunteering": "AMI3"
-        "published_at": "2018-11-11T08:40:51.620Z",
-        "url": "/questions/1",
-        "rol": "admin"
-      }
-    ]
+  + Attributes(Users)
+
+### Create a User [POST]
+Creates a new User.
 
 
-## Create a new user [POST]
-You may create a new user. It takes a JSON object.
-
-    + name (string)
-    + first_surname (string)
-    + second_surname (string)
-    + nickname (string)
-//    + password 
-    + email (string)
-    + birthday (date)
-    + studies (array[string]) - Collection of the studies 
-    + porfession (array[string])- Collection of different professions
-    + previous_volunteering (array[string])- Collection of different volunteering
-    + rol (string) - Admin or user(normal user)
+\\Mirar ultimos datoss!! 
++ Attributes (object)
+  + id_user: 1 (number, requiered)
+  + name: Sonia (string,required)
+  + first_surname: Lolo (string,required)
+  + second_surname: Aria (string,required)
+  + nickname: Sonya (string,required)
+  + password: katuwira (password,required)
+  + email: sonialolo@gmail.com: (email,required)
+  + birthday: 1984-01-12 (date,required)
+  + studies: ["journalism","psychology"] (array[string]) - Collection of the studies 
+  + porfessions: ["teacher","psychologist"] (array[string]) - Collection of different professions
+  + previous_volunteering: ["AMI3"] (array[string]) - Collection of different volunteering
+  + rol: user (string,required) - Admin or user(normal user)
 
 + Request (application/json)
-
-  {
-    "name": "Sonia",
-    "first_surname": "Lolo"
-    "second_surname": "Aira"
-    "nickname": "Sonya"
-//    "password": "katuwira"
-    "email": "soniaLolo@gmail.com"
-    "birthday": "1984-01-12"
-    "studies": ["social work"]
-    "professions" : ["teacher", "psychologist"]
-    "previous_volunteering": "AMI3"
-//    "url": "/questions/1",
-    "rol": "admin"
-  }
-
-
-+ Response 201 (application/json)
-
   + Headers
-
-    Location: /questions/2
-
-  + Body
-
-    {
-      "name": "Sonia",
-      "first_surname": "Lolo"
-      "second_surname": "Aira"
-      "nickname": "Sonya"
-  //    "password": "katuwira"
-      "email": "soniaLolo@gmail.com"
-      "birthday": "1984-01-12"
-      "studies": ["social work"]
-      "professions" : ["teacher", "psychologist"]
-      "previous_volunteering": "AMI3"
-      "published_at": "2018-11-11T08:40:51.620Z",
-      "url": "/questions/1",
-      "rol": "admin"
-    }
+    + Authentication: <user_token>
++ Response 200 (application/json)
+  + Attributes (User)
 
 
-## Modify a user [POST]
+## Update a user [PUT]
+Update infromation of some user
++ Request (application/json)
+  + Attributes (User)
++ Response 200 (application/json)
+  + Attributes (User)
+
+
 ## Delete a user [POST]
 //Borra todo el recursoo????
 ## Login user [POST]
 //hay que hacerlo??
 
 
-# Personal Information[cards]
+# Personal Information[/]
 
 {
   "name": "Carlos",
@@ -175,84 +124,91 @@ You may create a new user. It takes a JSON object.
   ]
 }
 
-
-
-
-
-## Choice [/questions/{question_id}/choices/{choice_id}]
-
+## Sheet [/Sheets/{sheet_id}]
+// Ver bien como gestionar el la parte del status. Las estructuras son diferentes
+// Mirar como van las fotos
 + Parameters
-    + question_id: 1 (required, number) - ID of the Question in form of an integer
-    + choice_id: 1 (required, number) - ID of the Choice in form of an integer
+  + question_id: 1 (required, number) - ID of the thecnical sheet
 
-### Vote on a Choice [POST]
-
-This action allows you to vote on a question's choice.
-
-+ Response 201
-
-    + Headers
-
-            Location: /questions/1
-
-## Questions Collection [/questions{?page}]
-
-+ Parameters
-    + page: 1 (optional, number) - The page of questions to return
-
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            Link: </questions?page=2>; rel="next"
-
-    + Body
-
-            [
-                {
-                    "question": "Favourite programming language?",
-                    "published_at": "2014-11-11T08:40:51.620Z",
-                    "url": "/questions/1",
-                    "choices": [
-                        {
-                            "choice": "Swift",
-                            "url": "/questions/1/choices/1",
-                            "votes": 2048
-                        }, {
-                            "choice": "Python",
-                            "url": "/questions/1/choices/2",
-                            "votes": 1024
-                        }, {
-                            "choice": "Objective-C",
-                            "url": "/questions/1/choices/3",
-                            "votes": 512
-                        }, {
-                            "choice": "Ruby",
-                            "url": "/questions/1/choices/4",
-                            "votes": 256
-                        }
-                    ]
-                }
-            ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON object containing a question and a collection of answers in the form of choices.
-
-+ question (string) - The question
-+ choices (array[string]) - A collection of choices.
-
-+ Request (application/json)
-
++Attributes(object)
+  + id_sheet: 1 (number, requiered)
+  + name: Carlos (string,required)
+  + first_surname: Vilchez (string,required)
+  + second_surname: Orlandini (string,required)
+  + bthday: 1993/04/21
+  + dni: 702076478x (string,required)
+  + zone: Chiclayo (string,required)
+  + address: Pueblo Joven 4 de Noviembre 23, Chiclayo: (email,required)
+  + family_photos: [<url1>,<url2>] (array[string]) - Collection of the family Photo urls
+  + house_photos: [<url1>,<url2>] (array[string]) - Collection of the house Photo urls
+  + responsible_name: (array(Status)) - Array of status Object
+    [
+      {
+        nombre: Rita, 
+        parentesco: Madre, 
+        DNI: 71182993C, 
+        tel: 722718290
+      }
+    ]
+  + family_information(array(array(Status))) - Array of array of Status Object    
+    [
+      [
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+          name: Rita,
+          first_surname: Orlandini,
+          second_surname : Ruiz,
+          bthday: 2016-12-03
         }
+      ]
+    ]
+  + center: array(Status) - centro actual, anterior, annio de entrada
+    [
+      {
+        prev_name, 
+        current_name,
+        timestamp
+      }
+    ]
+  + special_help: array(Status)
+  [
+    {
+      help_name,
+      center_name,
+      timestamp,
+      asistance,
+      coment
+    }
+  ] 
+
+  + free_time (array(Status))
+    [
+      {
+        activities: [array],
+        close_people: [array]
+        env_realation,
+
+      }
+    ]
+  + medical_situation (array(Status))
+    [
+      {
+        diagnostic: [],
+        movility,
+        chair,
+        comunication,
+        done_test,
+
+      }
+    ]
+
+  + dni: 702076478x (string,required)
+  + zone: Chiclayo (string,required)
+  + birthday: 1984-01-12 (date,required)
+  + studies: ["journalism","psychology"] (array[string]) - Collection of the studies 
+  + porfessions: ["teacher","psychologist"] (array[string]) - Collection of different professions
+  + previous_volunteering: ["AMI3"] (array[string]) - Collection of different volunteering
+  + published_at: 2016-03-05 (string, required) - An ISO8601 date when the user is created
+  + rol: user (string,required) - Admin or user(normal user)
+
+
 
