@@ -460,173 +460,122 @@ Creates a new State.
     + Body
 
             {
-              "id_sheet": 1,
-              "name": "Carlos",
-              "first_surname": "Vilchez",
-              "second_surname": "Orlandini",
-              "bthday": "1993/04/21",
-              "dni": "702076478x",
-              "zone": "Chiclayo",
-              "address": "Pueblo Joven 4 de Noviembre 23, Chiclayo",
-              "family_fotos": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {
-                    "urls": [<url1>,<url2>],
-                    "time": "2018/04/02"
+               "id_sheet":1,
+               "name":"Carlos",
+               "first_surname":"Vilchez",
+               "second_surname":"Orlandini",
+               "bthday":"1993/04/21",
+               "dni":"702076478x",
+               "zone":"Chiclayo",
+               "address":"Pueblo Joven 4 de Noviembre 23, Chiclayo",
+               "family_fotos":[
+                  {
+                     "prev_state":3,
+                     "id_state":4,
+                     "current_value":{
+                        "urls":[
+                           "<url1>",
+                           "<url2>"
+                        ],
+                        "time":"2018/04/02"
+                     },
+                     "timestamp":"2018/04/04",
+                     "id_user":3
+                  }
+               ],
+               "family_information":[
+                  {
+                     "prev_state":3,
+                     "id_state":4,
+                     "current_value":[
+                        {
+                           "name":"Noelia",
+                           "first_surname":"Perez",
+                           "second_surname":"Vilchez",
+                           "bthday":"1990/05/21",
+                           "relation":"sister",
+                           "coexistence":"yes",
+                           "study_work":"study",
+                           "observations":"She does not do anything at home"
+                        }
+                     ],
+                     "timestamp":"2018/04/04",
+                     "id_user":3
+                  }
+               ],
+               "center":[
+                  {
+                     "prev_state":null,
+                     "id_state":3,
+                     "current_value":{
+                        "start_year":2015,
+                        "name":"Angel Mary",
+                        "observations":""
+                     },
+                     "timestamp":"2018/04/04",
+                     "id_user":3
                   },
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "house_photos": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {
-                    "urls": [<url1>,<url2>],
-                    "time": "2018/04/02"
-                  },
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "responsible": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "family_information": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "center": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "therapies": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "social_situation": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "medical_info": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "home_info": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "economic_info": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "general_information": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "manifested_information": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "detected_information": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "warning_information": [
-                {
-                  "prev_state": 3,
-                  "id_state": 4,
-                  "current_value": {},
-                  "diagnsose": "Autism",
-                  "start_year": 1993,
-                  "timestamp": "2018/04/04",
-                  "id_user": 3
-                }
-              ],
-              "pendig": "yes"
+                  {
+                     "prev_state":3,
+                     "id_state":4,
+                     "current_value":{
+                        "start_year":2017,
+                        "name":"Katuwira",
+                        "observations":""
+                     },
+                     "timestamp":"2018/04/04",
+                     "id_user":3
+                  }
+               ],
+               "therapies":[
+                  {
+                     "prev_state":null,
+                     "id_state":4,
+                     "current_value":{
+                        "center":"AFAPED",
+                        "start_year":2016,
+                        "asistance":"Perfect",
+                        "observations":""
+                     },
+                     "timestamp":"2018/04/04",
+                     "id_user":3
+                  }
+               ],
+               "social_situation":[
+                  {
+                     "prev_state":null,
+                     "id_state":4,
+                     "current_value":{
+                        "free_time":"Football",
+                        "minders":"mother",
+                        "close_support":"grandmother",
+                        "enviornment_relationship":"good",
+                        "observations":""
+                     },
+                     "timestamp":"2018/04/04",
+                     "id_user":3
+                  }
+               ],
+               "medical_info":{
+
+                  
+                  "mobility":[
+                     {
+                        "prev_state":null,
+                        "id_state":4,
+                        "current_value":{
+                           "movements":"Little tasks",
+                           "wheelchair":"no",
+                           "observations":""
+                        },
+                        "timestamp":"2018/04/04",
+                        "id_user":3
+                     }
+                  ]
+               }
             }
-### View State Details [GET]
+
+### View Sheet Details [GET]
 
 Retrieve a sheet with the given id
 
@@ -634,30 +583,19 @@ Retrieve a sheet with the given id
   [Sheet][]
 
 
-### Update a State [PATCH]
+### Update a Sheet [PATCH]
 + Request (application/json)
 
         {
-            "current_value": 
-              {
-                "diagnsose": "Down's Syndrome",
-                "start_year": 1993
-              }
+            
+          "name": "Victor",
+          "first_surname": "Perez",
+            
         }
 
 + Response 200
 
-            {
-              "prev_state": 3,
-              "id_state": 4,
-              "current_value": 
-                {
-                  "diagnsose": "Down's Syndrome",
-                  "start_year": 1993
-                },
-              "timestamp": "2018/04/04",
-              "id_user": 3, 
-            }
+
 
 ## Sheet Collection [/sheets{?filter}]
 
@@ -676,21 +614,337 @@ A resource representing all of my Sheets in the system.
 
             [
               {
-                "prev_state": 3,
-                "id_state": 4,
-                "current_value":
+                "id_sheet": 1,
+                "name": "Carlos",
+                "first_surname": "Vilchez",
+                "second_surname": "Orlandini",
+                "bthday": "1993/04/21",
+                "dni": "702076478x",
+                "zone": "Chiclayo",
+                "address": "Pueblo Joven 4 de Noviembre 23, Chiclayo",
+                "family_fotos": [
                   {
-                    "diagnsose": "Autism",
-                    "start_year": 1993
-                  },
-                "timestamp": "2018/04/04",
-                "id_user": 3, 
-                "id_sheet": 2
-              }
-            ]
+                    "prev_state": 3,
+                    "id_state": 4,
+                    "current_value": {
+                      "urls": [<url1>,<url2>],
+                      "time": "2018/04/02"
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+                "house_photos": [
+                  {
+                    "prev_state": 3,
+                    "id_state": 4,
+                    "current_value": {
+                      "urls": [<url1>,<url2>],
+                      "time": "2018/04/02"
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+                "responsible": [
+                  {
+                    "prev_state": 3,
+                    "id_state": 4,
+                    "current_value": {
+                      "name": "Rita",
+                      "first_surname": "Vilchez",
+                      "second_surname": "Orlandini",
+                      "bthday": "1980/03/21",
+                      "relation": "mother",
+                      "coexistence": "yes",
+                      "study_work": "home",
+                      "tel": "299303043",
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
 
-### List every States [GET]
-Return a list of your states
+                "family_information": [
+                  {
+                    "prev_state": 3,
+                    "id_state": 4,
+                  "current_value": [
+                    {
+                      "name": "Noelia",
+                      "first_surname": "Perez",
+                      "second_surname": "Vilchez",
+                      "bthday": "1990/05/21",                    
+                      "relation": "sister",
+                      "coexistence": "yes",
+                      "study_work": "study",
+                      "observations": "She does not do anything at home"
+                    }
+                  ],
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+
+                "center": [
+                  {
+                    "prev_state": null,
+                    "id_state": 3,
+                    "current_value": {
+                      "start_year": 2015,
+                      "name": "Angel Mary",
+                      "observations": ""
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  },
+                  {
+                    "prev_state": 3,
+                    "id_state": 4,
+                    "current_value": {
+                      "start_year": 2017,
+                      "name": "Katuwira",
+                      "observations": ""
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+                "therapies": [
+                  {
+                    "prev_state": null,
+                    "id_state": 4,
+                    "current_value": {
+                      "center": "AFAPED",
+                      "start_year":2016,
+                      "asistance": "Perfect",
+                      "observations": ""
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+
+                "social_situation": [
+                  {
+                    "prev_state": null,
+                    "id_state": 4,
+                    "current_value": {
+                      "free_time": "Football",
+                      "minders":"mother",
+                      "close_support": "grandmother",
+                      "enviornment_relationship": "good",
+                      "observations": ""                  
+                    },
+                    "timestamp": "2018/04/04",
+                    "id_user": 3
+                  }
+                ],
+
+                "medical_info": {
+
+
+                  diagnose:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "diagnsose": "Autism",
+                        "start_year": 1996
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  Movility:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "movements": "Little tasks",
+                        "wheelchair":"no",
+                        "observations": ""  
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  comunication:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "level": "A few words"
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  tests:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "name": "Tac",
+                        "year":"2017",
+                        "observations": ""  
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  treatment:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "name": "Vitamains",
+                        "year":"2017",
+                        "observations": ""  
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  relative_disease:[
+                    {
+                      "prev_state": null,
+                      "id_state": 4,
+                      "current_value": {
+                        "name": "Altheimer",
+                        "relation":"Father",
+                        "observations": "He has to eat C Vitamins every day"  
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ]
+                },
+                  
+                
+
+                  "home_info": [
+                    {
+                      "prev_state": 3,
+                      "id_state": 4,
+                      "current_value": {
+                        "own_rent": "rent",
+                        "material":"Adobe",
+                        "facilities": ["tv","water","light"]
+                        "num_rooms":"2",
+                        "num_beds":"3",
+                        "material":"Adobe",
+                        "forniture":"They have everything",
+                        "salubrity":"Perfect",
+                        "observations": "They have a holl in one wall"    
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  "helps": {
+                    familiar_income:[
+                      {
+                        "prev_state": null,
+                        "id_state": 4,
+                        "current_value": {
+                          "amount": 1000,
+                          "observations:""
+                        },
+                        "timestamp": "2018/04/04",
+                        "id_user": 3
+                      }
+                    ],
+                    external_support:[
+                      {
+                        "prev_state": null,
+                        "id_state": 4,
+                        "current_value": {
+                          "name": "Altheimer",
+                          "relation":"Father",
+                          "observations": ""  
+                        },
+                        "timestamp": "2018/04/04",
+                        "id_user": 3
+                      }
+                    ],
+                    feeding_center:[
+                      {
+                        "prev_state": null,
+                        "id_state": 4,
+                        "current_value": {
+                          "name": "Nuestra guia",
+                          "start_year":"2017",
+                          "observations": ""  
+                        },
+                        "timestamp": "2018/04/04",
+                        "id_user": 3
+                      }
+                    ],
+                    others:[
+                      {
+                        "prev_state": null,
+                        "id_state": 4,
+                        "current_value": {
+                          "observations": ""  
+                        },
+                        "timestamp": "2018/04/04",
+                        "id_user": 3
+                      }
+                    ]
+                  }
+                  "general_information": [
+                    {
+                      "prev_state": 3,
+                      "id_state": 4,
+                      "current_value": {
+                        "message": "Carlos is geting better and better"
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  "manifested_information": [
+                    {
+                      "prev_state": 3,
+                      "id_state": 4,
+                      "current_value": {
+                        "message": "The mother needs a work "
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  "detected_information": [
+                    {
+                      "prev_state": 3,
+                      "id_state": 4,
+                      "current_value": {
+                        "message": "Carlos need more language therapy"
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  "warning_information": [
+                    {
+                      "prev_state": 3,
+                      "id_state": 4,
+                      "current_value": {
+                        "message": "Language therapy!"
+                      },
+                      "timestamp": "2018/04/04",
+                      "id_user": 3
+                    }
+                  ],
+                  "pendig": "yes"
+                }
+              ]
+
+
+
+### List every Sheet [GET]
+Return a list of your sheet
 
 + Parameters
   + filter: "%7B%22zone%22%3A%22Chiclayo%22%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
@@ -698,23 +952,12 @@ Return a list of your states
 + Response 200
   [Sheet Collection][]
 
-### Create a State [POST]
-Creates a new State.
+### Create a Sheet [POST]
+Creates a new Sheet.
 
 + Request (application/json)
 
-        {
-          "prev_state": 3,
-          "id_state": 4,
-          "current_value":
-            {
-              "diagnsose": "Autism",
-              "start_year": 1993
-            },
-          "timestamp": "2018/04/04",
-          "id_user": 3, 
-          "id_sheet": 2
-        }
+  [Sheet][]
 
 
 + Response 200

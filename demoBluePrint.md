@@ -186,7 +186,7 @@ Here is every resource related with the sheets
     + current_value (object) - Current field
       + diagnose (object) - Diagnose
        + name 
-       + year: 2010 (number,optional) - Year of the diagnose
+       + start_year: 2010 (number,optional) - Year of the diagnose
     + Movility: little tasks (string, required) - Checkbox with different options
     + wheelchair: no (string, required) - use of wheelchair
     + comunication (object) 
