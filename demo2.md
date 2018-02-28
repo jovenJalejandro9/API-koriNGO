@@ -11,28 +11,31 @@ Here is every resource related with the users
 
 ## User [/users/{user_id}]
 
+Users are the people who can acces to our system. Every user have these fields:
+  
 + Parameters
   + user_id: 1 (required, number) - ID of the User in form of an integer
 
 + Attributes(object)
-  + id_user: 1 (number, required)
-  + name: Sonia (string,required)
-  + first_surname: Lolo (string,required)
-  + second_surname: Aria (string,required)
-  + nickname: Sonya (string,required)
-  + password: katuwira (string,required)
-  + email: sonialolo@gmail.com: (string,required)
-  + birthday: 1984-01-12 (date,required)
-  + studies: journalism,psychology (array[string]) - Collection of the studies 
-  + porfessions: teacher,psychologist (array[string]) - Collection of different professions
-  + previous_volunteering: AMI3 (array[string]) - Collection of different volunteering
-  + published_at: 2016-03-05 (string, required) - An ISO8601 date when the user is created
+  + id_user: 1 (number, required) - ID of the user
+  + name: Sonia (string,required) - Name of the user
+  + first_surname: Lolo (string,required) - First surname of the user
+  + second_surname: Aria (string,required) - Second surname of the user
+  + nickname: Sonya (string,required) - Nickname user. Used on the login(or email)
+  + password: katuwira (string,required) - Password of the user. Used on the login 
+  + email: sonialolo@gmail.com: (string,required) - User email. Used on the login (or Nickname)
+  + birthday: 1984-01-12 (date,required) - User bithday
+  + studies: journalism,psychology (array[string],required) - Collection of the studies. If the user did not study anything you have write "nothing"
+  + porfessions: teacher,psychologist (array[string],required) - Collection of different professions. If the user did not work anything you have write "nothing"
+  + previous_volunteering: AMI3 (array[string],required) - Collection of different volunteering.If the user did not volunteer anything you have write "nothing"
+  + created_at: Wed Feb 28 2018 17:02:43 GMT+0100(datetime, required) - An ISO8601 date when the user is created
+  + updated: Wed Feb 28 2018 17:02:43 GMT+0100 (datetime, required) - An ISO8601 date when the user is created
   + rol: user (string,required) - Admin or user(normal user)
 
 
 + Model (application/hal+json)
 
-    HAL+JSON representation of User Resource.
+    JSON representation of User Resource.
 
     + Headers
 
@@ -66,13 +69,13 @@ Here is every resource related with the users
 
 ### View Users Details [GET]
 
-Retrieve a user with the given id
+Retrieve a User with the given id in the paremeters
 + Response 200
 
     [User][]
 
 ### Update a User [PATCH]
-To update a User send a JSON with updated value for one or more of the User resource attributes.
+To update a User send a JSON with updated value for one or more of the User resource attributes. It is possible to modify every field.
 
 + Request (application/json)
 
@@ -80,13 +83,14 @@ To update a User send a JSON with updated value for one or more of the User reso
             "name": "Sonia"
         }
 
+
 + Response 200
 
     [User][]
 
 ## User Collection [/users{?filter}]
 
-A resource representing all of my Users in the system.
+A resource representing all of my Users in the system. This is an array of users
 
 + Attributes(array[User])
 
@@ -126,19 +130,18 @@ A resource representing all of my Users in the system.
             ]
 
 ### List every Users [GET]
-Return a list of your users
+Return a list of the users
 
 + Parameters
-  + filter: "%7B%22zone%22%3A%22Chiclayo%22%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
+  + filter: "%7B%22porfessions%22%3A+%22teacher%22%7D" (string, optional) - Different filters we are goinf to use. In this example we are using {"porfessions": "teacher"}
 
 + Response 200
   [User Collection][]
 
 ### Create a User [POST]
-Creates a new User.
+Creates a new User. You should fill in the every fields.
 
 + Request (application/json)
-
 
         {
           "id_user": 1,
@@ -168,12 +171,21 @@ Creates a new User.
   [User][]
 
 ### Delete a User [DELETE]
+Removal of the user with an Id
+
 + Response 204
 
 # Group Visits 
 Every resource related with the Visits
 
 ## Visit [/visits/{visit_id}]
+The users do visits to the participants houses. The resource visit has the next fields:
+
+  + id_visit: 1(number,required) - Visit Id
+  + id_Sheet: 1(number,required) - Sheet Id
+  + id_user: 1(number,required) - Id of user who is goint to do or update the sheet  
+  + date: 2018/04/04 (string, required) - Date when the visit is done
+  + state: pendient(string,required) - State of the visit(pendient, incomplete, done) 
 
 + Parameters
   + visit_id: 1 (number,required) - ID of the visit
@@ -191,7 +203,7 @@ Every resource related with the Visits
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
 
     + Body
 
@@ -251,7 +263,7 @@ A resource representing all of my Visitis in the system.
 Return a list of your Visits
 
 + Parameters
-  + filter: "%7B%22zone%22%3A%22Chiclayo%22%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
+  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
 
 + Response 200
   [Visit Collection][]
@@ -383,7 +395,7 @@ A resource representing all of my States in the system.
 Return a list of your states
 
 + Parameters
-  + filter: "%7B%22zone%22%3A%22Chiclayo%22%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'id_sheet':1}
+  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'id_sheet':1}
 
 + Response 200
   [State Collection][]
@@ -405,8 +417,6 @@ Creates a new State.
           "id_user": 3, 
           "id_sheet": 2
         }
-
-
 + Response 200
   [State][]
 
@@ -444,7 +454,7 @@ Creates a new State.
   + detected_information (array[State]) - Array of State object 
   + warning_information (array[State]) - Array of State object 
 
-  + pendig: yes (string, required) - yes if we have to fill in more info afterwards
+  + complete: false (string, required) - false if the sheet requires further attention to fill the information
 
 
 
@@ -456,123 +466,300 @@ Creates a new State.
     + Headers
 
             Authentication: <user_token>
-
     + Body
 
-            {
-               "id_sheet":1,
-               "name":"Carlos",
-               "first_surname":"Vilchez",
-               "second_surname":"Orlandini",
-               "bthday":"1993/04/21",
-               "dni":"702076478x",
-               "zone":"Chiclayo",
-               "address":"Pueblo Joven 4 de Noviembre 23, Chiclayo",
-               "family_fotos":[
-                  {
-                     "prev_state":3,
-                     "id_state":4,
-                     "current_value":{
-                        "urls":[
-                           "<url1>",
-                           "<url2>"
-                        ],
-                        "time":"2018/04/02"
-                     },
-                     "timestamp":"2018/04/04",
-                     "id_user":3
-                  }
-               ],
-               "family_information":[
-                  {
-                     "prev_state":3,
-                     "id_state":4,
-                     "current_value":[
-                        {
-                           "name":"Noelia",
-                           "first_surname":"Perez",
-                           "second_surname":"Vilchez",
-                           "bthday":"1990/05/21",
-                           "relation":"sister",
-                           "coexistence":"yes",
-                           "study_work":"study",
-                           "observations":"She does not do anything at home"
-                        }
-                     ],
-                     "timestamp":"2018/04/04",
-                     "id_user":3
-                  }
-               ],
-               "center":[
-                  {
-                     "prev_state":null,
-                     "id_state":3,
-                     "current_value":{
-                        "start_year":2015,
-                        "name":"Angel Mary",
-                        "observations":""
-                     },
-                     "timestamp":"2018/04/04",
-                     "id_user":3
+            {  
+              "id_sheet":1,
+              "name":"Carlos",
+              "first_surname":"Vilchez",
+              "second_surname":"Orlandini",
+              "bthday":"1993/04/21",
+              "dni":"702076478x",
+              "zone":"Chiclayo",
+              "address":"Pueblo Joven 4 de Noviembre 23, Chiclayo",
+              "family_fotos":[  
+                {  
+                  "prev_state":null,
+                  "id_state":1,
+                  "current_value":{  
+                    "urls":[  
+                      "<url1>",
+                      "<url2>"
+                    ],
+                    "time":"2018/04/02"
                   },
-                  {
-                     "prev_state":3,
-                     "id_state":4,
-                     "current_value":{
-                        "start_year":2017,
-                        "name":"Katuwira",
-                        "observations":""
-                     },
-                     "timestamp":"2018/04/04",
-                     "id_user":3
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "family_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":2,
+                  "current_value":[  
+                    {  
+                      "name":"Noelia",
+                      "first_surname":"Perez",
+                      "second_surname":"Vilchez",
+                      "bthday":"1990/05/21",
+                      "relation":"sister",
+                      "coexistence":"yes",
+                      "study_work":"study",
+                      "observations":"She does not do anything at home"
+                    }
+                  ],
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "center":[  
+                {  
+                  "prev_state":null,
+                  "id_state":3,
+                  "current_value":{  
+                    "start_year":2015,
+                    "name":"Angel Mary",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                },
+                {  
+                  "prev_state":3,
+                  "id_state": 21,
+                  "current_value":{  
+                    "start_year":2017,
+                    "name":"Katuwira",
+                    "observations":""
+                  },
+                  "timestamp":"2018/10/04",
+                  "id_user":3
+                }
+              ],
+              "therapies":[  
+                {  
+                  "prev_state":null,
+                  "id_state": 4,
+                  "current_value":{  
+                    "center":"AFAPED",
+                    "start_year":2016,
+                    "asistance":"Perfect",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "social_situation":[  
+                {  
+                  "prev_state":null,
+                  "id_state":5,
+                  "current_value":{  
+                    "free_time":"Football",
+                    "minders":"mother",
+                    "close_support":"grandmother",
+                    "enviornment_relationship":"good",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "medical_info":{  
+                "diagnose":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":6,
+                    "current_value":{  
+                      "diagnsose":"Autism",
+                      "start_year":1996
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
-               ],
-               "therapies":[
-                  {
-                     "prev_state":null,
-                     "id_state":4,
-                     "current_value":{
-                        "center":"AFAPED",
-                        "start_year":2016,
-                        "asistance":"Perfect",
-                        "observations":""
-                     },
-                     "timestamp":"2018/04/04",
-                     "id_user":3
+                ],
+                "mobility":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":7,
+                    "current_value":{  
+                      "movements":"Little tasks",
+                      "wheelchair":"no",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
-               ],
-               "social_situation":[
-                  {
-                     "prev_state":null,
-                     "id_state":4,
-                     "current_value":{
-                        "free_time":"Football",
-                        "minders":"mother",
-                        "close_support":"grandmother",
-                        "enviornment_relationship":"good",
-                        "observations":""
-                     },
-                     "timestamp":"2018/04/04",
-                     "id_user":3
+                ],
+                "comunication":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":8,
+                    "current_value":{  
+                      "level":"A few words"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
-               ],
-               "medical_info":{
-
-                  
-                  "mobility":[
-                     {
-                        "prev_state":null,
-                        "id_state":4,
-                        "current_value":{
-                           "movements":"Little tasks",
-                           "wheelchair":"no",
-                           "observations":""
-                        },
-                        "timestamp":"2018/04/04",
-                        "id_user":3
-                     }
-                  ]
-               }
+                ],
+                "tests":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":9,
+                    "current_value":{  
+                      "name":"Tac",
+                      "year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "treatment":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":10,
+                    "current_value":{  
+                      "name":"Vitamains",
+                      "year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "relative_disease":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":11,
+                    "current_value":{  
+                      "name":"Altheimer",
+                      "relation":"Father",
+                      "observations":"He has to eat C Vitamins every day"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ]
+              },
+              "home_info":[  
+                {  
+                  "prev_state":null,
+                  "id_state":12,
+                  "current_value":{  
+                    "own_rent":"rent",
+                    "material":"Adobe",
+                    "facilities":[  
+                      "tv",
+                      "water",
+                      "light"
+                    ],
+                    "num_rooms":2,
+                    "num_beds":3,
+                    "forniture":"They have everything",
+                    "salubrity":"Perfect",
+                    "observations":"They have a holl in one wall"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "helps":{  
+                "familiar_income":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":13,
+                    "current_value":{  
+                      "amount":1000,
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "external_support":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":14,
+                    "current_value":{  
+                      "name":"Altheimer",
+                      "relation":"Father",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "feeding_center":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":15,
+                    "current_value":{  
+                      "name":"Nuestra guia",
+                      "start_year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "others":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":16,
+                    "current_value":{  
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ]
+              },
+              "general_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":17,
+                  "current_value":{  
+                    "message":"Carlos is geting better and better"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "manifested_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":18,
+                  "current_value":{  
+                    "message":"The mother needs a work "
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "detected_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":19,
+                  "current_value":{  
+                    "message":"Carlos need more language therapy"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "warning_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":20,
+                  "current_value":{  
+                    "message":"Language therapy!"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "complete": false
             }
 
 ### View Sheet Details [GET]
@@ -587,13 +774,12 @@ Retrieve a sheet with the given id
 + Request (application/json)
 
         {
-            
-          "name": "Victor",
-          "first_surname": "Perez",
-            
+          "name": "Carlos",
+          "first_surname": "Vilchez",
         }
 
 + Response 200
+  [Sheet][]
 
 
 
@@ -613,341 +799,308 @@ A resource representing all of my Sheets in the system.
     + Body
 
             [
-              {
-                "id_sheet": 1,
-                "name": "Carlos",
-                "first_surname": "Vilchez",
-                "second_surname": "Orlandini",
-                "bthday": "1993/04/21",
-                "dni": "702076478x",
-                "zone": "Chiclayo",
-                "address": "Pueblo Joven 4 de Noviembre 23, Chiclayo",
-                "family_fotos": [
-                  {
-                    "prev_state": 3,
-                    "id_state": 4,
-                    "current_value": {
-                      "urls": [<url1>,<url2>],
-                      "time": "2018/04/02"
-                    },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
-                  }
-                ],
-                "house_photos": [
-                  {
-                    "prev_state": 3,
-                    "id_state": 4,
-                    "current_value": {
-                      "urls": [<url1>,<url2>],
-                      "time": "2018/04/02"
-                    },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
-                  }
-                ],
-                "responsible": [
-                  {
-                    "prev_state": 3,
-                    "id_state": 4,
-                    "current_value": {
-                      "name": "Rita",
-                      "first_surname": "Vilchez",
-                      "second_surname": "Orlandini",
-                      "bthday": "1980/03/21",
-                      "relation": "mother",
-                      "coexistence": "yes",
-                      "study_work": "home",
-                      "tel": "299303043",
-                    },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
-                  }
-                ],
 
-                "family_information": [
-                  {
-                    "prev_state": 3,
-                    "id_state": 4,
-                  "current_value": [
-                    {
-                      "name": "Noelia",
-                      "first_surname": "Perez",
-                      "second_surname": "Vilchez",
-                      "bthday": "1990/05/21",                    
-                      "relation": "sister",
-                      "coexistence": "yes",
-                      "study_work": "study",
-                      "observations": "She does not do anything at home"
-                    }
-                  ],
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
+              {  
+                "id_sheet":1,
+                "name":"Carlos",
+                "first_surname":"Vilchez",
+                "second_surname":"Orlandini",
+                "bthday":"1993/04/21",
+                "dni":"702076478x",
+                "zone":"Chiclayo",
+                "address":"Pueblo Joven 4 de Noviembre 23, Chiclayo",
+                "family_fotos":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "urls":[  
+                        "<url1>",
+                        "<url2>"
+                      ],
+                      "time":"2018/04/02"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
                 ],
-
-                "center": [
-                  {
-                    "prev_state": null,
-                    "id_state": 3,
-                    "current_value": {
-                      "start_year": 2015,
-                      "name": "Angel Mary",
-                      "observations": ""
+                "family_information":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":[  
+                      {  
+                        "name":"Noelia",
+                        "first_surname":"Perez",
+                        "second_surname":"Vilchez",
+                        "bthday":"1990/05/21",
+                        "relation":"sister",
+                        "coexistence":"yes",
+                        "study_work":"study",
+                        "observations":"She does not do anything at home"
+                      }
+                    ],
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "center":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":3,
+                    "current_value":{  
+                      "start_year":2015,
+                      "name":"Angel Mary",
+                      "observations":""
                     },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   },
-                  {
-                    "prev_state": 3,
-                    "id_state": 4,
-                    "current_value": {
-                      "start_year": 2017,
-                      "name": "Katuwira",
-                      "observations": ""
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "start_year":2017,
+                      "name":"Katuwira",
+                      "observations":""
                     },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
                 ],
-                "therapies": [
-                  {
-                    "prev_state": null,
-                    "id_state": 4,
-                    "current_value": {
-                      "center": "AFAPED",
+                "therapies":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "center":"AFAPED",
                       "start_year":2016,
-                      "asistance": "Perfect",
-                      "observations": ""
+                      "asistance":"Perfect",
+                      "observations":""
                     },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
                 ],
-
-                "social_situation": [
-                  {
-                    "prev_state": null,
-                    "id_state": 4,
-                    "current_value": {
-                      "free_time": "Football",
+                "social_situation":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "free_time":"Football",
                       "minders":"mother",
-                      "close_support": "grandmother",
-                      "enviornment_relationship": "good",
-                      "observations": ""                  
+                      "close_support":"grandmother",
+                      "enviornment_relationship":"good",
+                      "observations":""
                     },
-                    "timestamp": "2018/04/04",
-                    "id_user": 3
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
                 ],
-
-                "medical_info": {
-
-
-                  diagnose:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "diagnsose": "Autism",
-                        "start_year": 1996
+                "medical_info":{  
+                  "diagnose":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "diagnsose":"Autism",
+                        "start_year":1996
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  Movility:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "movements": "Little tasks",
+                  "mobility":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "movements":"Little tasks",
                         "wheelchair":"no",
-                        "observations": ""  
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  comunication:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "level": "A few words"
+                  "comunication":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "level":"A few words"
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  tests:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "name": "Tac",
+                  "tests":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "name":"Tac",
                         "year":"2017",
-                        "observations": ""  
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  treatment:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "name": "Vitamains",
+                  "treatment":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "name":"Vitamains",
                         "year":"2017",
-                        "observations": ""  
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  relative_disease:[
-                    {
-                      "prev_state": null,
-                      "id_state": 4,
-                      "current_value": {
-                        "name": "Altheimer",
+                  "relative_disease":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "name":"Altheimer",
                         "relation":"Father",
-                        "observations": "He has to eat C Vitamins every day"  
+                        "observations":"He has to eat C Vitamins every day"
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ]
                 },
-                  
-                
-
-                  "home_info": [
-                    {
-                      "prev_state": 3,
-                      "id_state": 4,
-                      "current_value": {
-                        "own_rent": "rent",
-                        "material":"Adobe",
-                        "facilities": ["tv","water","light"]
-                        "num_rooms":"2",
-                        "num_beds":"3",
-                        "material":"Adobe",
-                        "forniture":"They have everything",
-                        "salubrity":"Perfect",
-                        "observations": "They have a holl in one wall"    
-                      },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
-                    }
-                  ],
-                  "helps": {
-                    familiar_income:[
-                      {
-                        "prev_state": null,
-                        "id_state": 4,
-                        "current_value": {
-                          "amount": 1000,
-                          "observations:""
-                        },
-                        "timestamp": "2018/04/04",
-                        "id_user": 3
-                      }
-                    ],
-                    external_support:[
-                      {
-                        "prev_state": null,
-                        "id_state": 4,
-                        "current_value": {
-                          "name": "Altheimer",
-                          "relation":"Father",
-                          "observations": ""  
-                        },
-                        "timestamp": "2018/04/04",
-                        "id_user": 3
-                      }
-                    ],
-                    feeding_center:[
-                      {
-                        "prev_state": null,
-                        "id_state": 4,
-                        "current_value": {
-                          "name": "Nuestra guia",
-                          "start_year":"2017",
-                          "observations": ""  
-                        },
-                        "timestamp": "2018/04/04",
-                        "id_user": 3
-                      }
-                    ],
-                    others:[
-                      {
-                        "prev_state": null,
-                        "id_state": 4,
-                        "current_value": {
-                          "observations": ""  
-                        },
-                        "timestamp": "2018/04/04",
-                        "id_user": 3
-                      }
-                    ]
+                "home_info":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "own_rent":"rent",
+                      "material":"Adobe",
+                      "facilities":[  
+                        "tv",
+                        "water",
+                        "light"
+                      ],
+                      "num_rooms":2,
+                      "num_beds":3,
+                      "forniture":"They have everything",
+                      "salubrity":"Perfect",
+                      "observations":"They have a holl in one wall"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
                   }
-                  "general_information": [
-                    {
-                      "prev_state": 3,
-                      "id_state": 4,
-                      "current_value": {
-                        "message": "Carlos is geting better and better"
+                ],
+                "helps":{  
+                  "familiar_income":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "amount":1000,
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  "manifested_information": [
-                    {
-                      "prev_state": 3,
-                      "id_state": 4,
-                      "current_value": {
-                        "message": "The mother needs a work "
+                  "external_support":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "name":"Altheimer",
+                        "relation":"Father",
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  "detected_information": [
-                    {
-                      "prev_state": 3,
-                      "id_state": 4,
-                      "current_value": {
-                        "message": "Carlos need more language therapy"
+                  "feeding_center":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "name":"Nuestra guia",
+                        "start_year":"2017",
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
                   ],
-                  "warning_information": [
-                    {
-                      "prev_state": 3,
-                      "id_state": 4,
-                      "current_value": {
-                        "message": "Language therapy!"
+                  "others":[  
+                    {  
+                      "prev_state":null,
+                      "id_state":4,
+                      "current_value":{  
+                        "observations":""
                       },
-                      "timestamp": "2018/04/04",
-                      "id_user": 3
+                      "timestamp":"2018/04/04",
+                      "id_user":3
                     }
-                  ],
-                  "pendig": "yes"
-                }
-              ]
+                  ]
+                },
+                "general_information":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "message":"Carlos is geting better and better"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "manifested_information":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "message":"The mother needs a work "
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "detected_information":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "message":"Carlos need more language therapy"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "warning_information":[  
+                  {  
+                    "prev_state":3,
+                    "id_state":4,
+                    "current_value":{  
+                      "message":"Language therapy!"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "pendig":"yes"
+              }
 
-
+            ]
 
 ### List every Sheet [GET]
 Return a list of your sheet
 
 + Parameters
-  + filter: "%7B%22zone%22%3A%22Chiclayo%22%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
+  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
 
 + Response 200
   [Sheet Collection][]
@@ -957,7 +1110,300 @@ Creates a new Sheet.
 
 + Request (application/json)
 
-  [Sheet][]
+            {  
+              "id_sheet":1,
+              "name":"Carlos",
+              "first_surname":"Vilchez",
+              "second_surname":"Orlandini",
+              "bthday":"1993/04/21",
+              "dni":"702076478x",
+              "zone":"Chiclayo",
+              "address":"Pueblo Joven 4 de Noviembre 23, Chiclayo",
+              "family_fotos":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "urls":[  
+                      "<url1>",
+                      "<url2>"
+                    ],
+                    "time":"2018/04/02"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "family_information":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":[  
+                    {  
+                      "name":"Noelia",
+                      "first_surname":"Perez",
+                      "second_surname":"Vilchez",
+                      "bthday":"1990/05/21",
+                      "relation":"sister",
+                      "coexistence":"yes",
+                      "study_work":"study",
+                      "observations":"She does not do anything at home"
+                    }
+                  ],
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "center":[  
+                {  
+                  "prev_state":null,
+                  "id_state":3,
+                  "current_value":{  
+                    "start_year":2015,
+                    "name":"Angel Mary",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                },
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "start_year":2017,
+                    "name":"Katuwira",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "therapies":[  
+                {  
+                  "prev_state":null,
+                  "id_state":4,
+                  "current_value":{  
+                    "center":"AFAPED",
+                    "start_year":2016,
+                    "asistance":"Perfect",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "social_situation":[  
+                {  
+                  "prev_state":null,
+                  "id_state":4,
+                  "current_value":{  
+                    "free_time":"Football",
+                    "minders":"mother",
+                    "close_support":"grandmother",
+                    "enviornment_relationship":"good",
+                    "observations":""
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "medical_info":{  
+                "diagnose":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "diagnsose":"Autism",
+                      "start_year":1996
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "mobility":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "movements":"Little tasks",
+                      "wheelchair":"no",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "comunication":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "level":"A few words"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "tests":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "name":"Tac",
+                      "year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "treatment":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "name":"Vitamains",
+                      "year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "relative_disease":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "name":"Altheimer",
+                      "relation":"Father",
+                      "observations":"He has to eat C Vitamins every day"
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ]
+              },
+              "home_info":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "own_rent":"rent",
+                    "material":"Adobe",
+                    "facilities":[  
+                      "tv",
+                      "water",
+                      "light"
+                    ],
+                    "num_rooms":2,
+                    "num_beds":3,
+                    "forniture":"They have everything",
+                    "salubrity":"Perfect",
+                    "observations":"They have a holl in one wall"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "helps":{  
+                "familiar_income":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "amount":1000,
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "external_support":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "name":"Altheimer",
+                      "relation":"Father",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "feeding_center":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "name":"Nuestra guia",
+                      "start_year":"2017",
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ],
+                "others":[  
+                  {  
+                    "prev_state":null,
+                    "id_state":4,
+                    "current_value":{  
+                      "observations":""
+                    },
+                    "timestamp":"2018/04/04",
+                    "id_user":3
+                  }
+                ]
+              },
+              "general_information":[  
+                {  
+                  "prev_state":null,
+                  "id_state":4,
+                  "current_value":{  
+                    "message":"Carlos is geting better and better"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "manifested_information":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "message":"The mother needs a work "
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "detected_information":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "message":"Carlos need more language therapy"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "warning_information":[  
+                {  
+                  "prev_state":3,
+                  "id_state":4,
+                  "current_value":{  
+                    "message":"Language therapy!"
+                  },
+                  "timestamp":"2018/04/04",
+                  "id_user":3
+                }
+              ],
+              "pendig":"yes"
+            }
+
 
 
 + Response 200
