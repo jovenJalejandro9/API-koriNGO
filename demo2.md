@@ -2,54 +2,123 @@ FORMAT: 1A
 
 # KoriNGO
 
-//Meter headers!! 
-
 This is an App to make the management of the sponsorship cards of the NGO Koricancha (www.koricancha.org) easier. The App also will ease the visits of the volunteers who are goin to create or update one of these cards
+
+# Data Structures
+
+## UserStruct
+  + id: 1 (number, required) - ID of the user
+  + name: Sonia (string,required) - Name of the user
+  + first_surname: Lolo (string,required) - First surname of the user
+  + second_surname: Aria (string,required) - Second surname of the user
+  + nickname: Sonya (string,required) - Nickname user. Used on the login(or email)
+  + email: sonialolo@gmail.com: (string,required) - User email. Used on the login (or Nickname)
+  + birthday: 1984-01-12 (string,required) - User bithday
+  + studies: journalism,psychology (array[string],required) - Collection of the studies. If the usuer did not study anything the collection will be empty
+  + porfessions: teacher,psychologist (array[string],required) - Collection of different professions. If the usuer did not work anything the collection will be empty
+  + prev_volunteering: AMI3 (array[string],required) - Collection of different volunteering. If the usuer did not study anything the collection will be empty
+  + created_at: Wed Feb 28 2018 17:02:43 GMT+0100(string, required) - An ISO8601 date when the user is created
+  + updated: Wed Feb 28 2018 17:02:43 GMT+0100 (string, required) - An ISO8601 date when the user is created
+  + rol: user (string,required) - Admin or user(normal user)
+
+## UsersStruct (array)
++ (UserStruct)
+
+## VisitStructure
+  + id: 1(number,required) - Visit Id
+  + sheet_id: 1(number,required) - Sheet Id
+  + user_id: 1(number,required) - Id of user who is goint to do or update the sheet  
+  + date: 2018/04/04 (string, required) - Date when the visit is done
+  + state: pendient(string,required) - State of the visit(pendient, incomplete, done) 
+
+## VisitsStructure(array)
+  + (VisitStructure)
+
+## StateStruct
+  + id: 4(number,required) - Id of the current state
+  + prev_state: 3(number, required) - Id of the previous value
+  + value (required) - Any kind of variable
+    + diagnsose: Autism(string,required) - Disagnose
+    + start_year: 1993(number,required) - Diagnoise year 
+  + timestamp:  Wed Feb 28 2018 17:02:43 GMT+0100(string,required) - Date of record data
+  + user_id: 3(number, required) - Id of the user who modify the field
+
+## StatesStruct(array)
+  + (StateStruct)
+
+## SheetStruct 
+  + id: 1 (number, required) - Sheet ID
+  + name: Carlos (string,required) - Name of the participant
+  + first_surname: Vilchez (string,required) - Participant first surname
+  + second_surname: Orlandini (string) - Participant second surname
+  + bthday: 1993/04/21 (string) - Participant birthday
+  + dni: 702076478x (string) - Participant DNI
+  + zone: Chiclayo (string,required) - Zona where the participant is living
+  + address: Pueblo Joven 4 de Noviembre 23, Chiclayo (string,required) - Participant address
+
+  + family_fotos:<url1>,<url2> (array[State]) - List of State Object
+  + house_photos:<url1>,<url2>  (array[State]) - Array of State Object
+  + responsible (array[State]) - Array of State object
+  + family_information (array[State]) - Array of State object  
+  + center (array[State]) - Array of Status Object. School
+  + therapies(array[State]) - Array of State object  
+  + social_situation (array[State]) - Array of State object  
+  + medical_info (array[State]) - Array of State object 
+  + home_info (array[State]) - Array of State object 
+  + economic_info (array[State]) - Array of State object 
+  + general_information (array[State]) - Array of State object 
+  + manifested_information (array[State]) - Array of State object 
+  + detected_information (array[State]) - Array of State object 
+  + warning_information (array[State]) - Array of State object 
+  + complete: false (boolean, required) - false if the sheet requires further attention to fill the information
+
+## SheetsStructure(array)
+  + (SheetStruct)
+
+
 
 # Group Users
 Here is every resource related with the users
 
 ## User [/users/{user_id}]
-
 Users are the people who can acces to our system. Every user have these fields:
-  
+
+name | example_value | kind_value | requiered | description
+--:| ---- | --- | --- | --- 
+id | 1 |number|required| ID of the user
+name|Sonia |string|true| Name of the user
+first_surname| Lolo |string|true|First surname of the user
+second_surname| Aria |string|true| Second surname of the user
+nickname|Sonya |string|true|Nickname user. Used on the login(or email)
+email| sonialolo@gmail.com|string|true|User email. Used on the login (or Nickname)
+birthday| 1984-01-12 |string|true| User bithday
+studies|journalism,psychology|array[string]|true| Collection of the studies. If the usuer did not study anything the collection will be empty
+porfessions|teacher,psychologist |array[string]|true| Collection of different professions. If the usuer did not work anything the collection will be empty
+prev_volunteering| AMI3 |(array[string]|true|Collection of different volunteering. If the usuer did not study anything the collection will be empty
+created_at| Wed Feb 28 2018 17:02:43 GMT+0100|string| true| An ISO8601 date when the user is created
+updated|Wed Feb 28 2018 17:02:43 GMT+0100 |string| true| An ISO8601 date when the user is created
+
++ Attributes(UserStruct)
+
 + Parameters
   + user_id: 1 (required, number) - ID of the User in form of an integer
 
-+ Attributes(object)
-  + id_user: 1 (number, required) - ID of the user
-  + name: Sonia (string,required) - Name of the user
-  + first_surname: Lolo (string,required) - First surname of the user
-  + second_surname: Aria (string,required) - Second surname of the user
-  + nickname: Sonya (string,required) - Nickname user. Used on the login(or email)
-  + password: katuwira (string,required) - Password of the user. Used on the login 
-  + email: sonialolo@gmail.com: (string,required) - User email. Used on the login (or Nickname)
-  + birthday: 1984-01-12 (date,required) - User bithday
-  + studies: journalism,psychology (array[string],required) - Collection of the studies. If the user did not study anything you have write "nothing"
-  + porfessions: teacher,psychologist (array[string],required) - Collection of different professions. If the user did not work anything you have write "nothing"
-  + previous_volunteering: AMI3 (array[string],required) - Collection of different volunteering.If the user did not volunteer anything you have write "nothing"
-  + created_at: Wed Feb 28 2018 17:02:43 GMT+0100(datetime, required) - An ISO8601 date when the user is created
-  + updated: Wed Feb 28 2018 17:02:43 GMT+0100 (datetime, required) - An ISO8601 date when the user is created
-  + rol: user (string,required) - Admin or user(normal user)
-
-
-+ Model (application/hal+json)
++ Model (application/json)
 
     JSON representation of User Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
 
     + Body
 
             {
-              "id_user": 1,
+              "id": 1,
               "name": "Sonia",
               "first_surname": "Lolo",
               "second_surname": "Aria",
               "nickname": "Sonya",
-              "password": "katuwira",
               "email": "sonialolo@gmail.com:",
               "birthday": "1984-01-12",
               "studies": [
@@ -60,16 +129,20 @@ Users are the people who can acces to our system. Every user have these fields:
                 "teacher",
                 "psychologist"
               ],
-              "previous_volunteering": [
+              "prev_volunteering": [
                 "AMI3"
               ],
               "published_at": "2016",
               "rol": "user"
             }
 
-### View Users Details [GET]
+### View User Details [GET]
 
 Retrieve a User with the given id in the paremeters
+
++ Attributes(object)
+  + user_id: 1 (number, required) - ID of the user
+
 + Response 200
 
     [User][]
@@ -88,29 +161,34 @@ To update a User send a JSON with updated value for one or more of the User reso
 
     [User][]
 
+### Delete a User [DELETE]
+Removal of the user with an Id
+
++ Response 204
+
+
 ## User Collection [/users{?filter}]
 
 A resource representing all of my Users in the system. This is an array of users
 
-+ Attributes(array[User])
++ Attributes(UsersStruct)
 
-+ Model (application/hal+json)
++ Model (application/json)
 
-    HAL+JSON representation of user Collection Resource.
+    JSON representation of user Collection Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
     + Body
 
             [
               {
-                "id_user": 1,
+                "id": 1,
                 "name": "Sonia",
                 "first_surname": "Lolo",
                 "second_surname": "Aria",
                 "nickname": "Sonya",
-                "password": "katuwira",
                 "email": "sonialolo@gmail.com:",
                 "birthday": "1984-01-12",
                 "studies": [
@@ -121,7 +199,7 @@ A resource representing all of my Users in the system. This is an array of users
                   "teacher",
                   "psychologist"
                 ],
-                "previous_volunteering": [
+                "prev_volunteering": [
                   "AMI3"
                 ],
                 "published_at": "2016",
@@ -144,12 +222,10 @@ Creates a new User. You should fill in the every fields.
 + Request (application/json)
 
         {
-          "id_user": 1,
           "name": "Sonia",
           "first_surname": "Lolo",
           "second_surname": "Aria",
           "nickname": "Sonya",
-          "password": "katuwira",
           "email": "sonialolo@gmail.com:",
           "birthday": "1984",
           "studies": [
@@ -160,7 +236,7 @@ Creates a new User. You should fill in the every fields.
             "teacher",
             "psychologist"
           ],
-          "previous_volunteering": [
+          "prev_volunteering": [
             "AMI3"
           ],
           "published_at": "2016",
@@ -170,10 +246,6 @@ Creates a new User. You should fill in the every fields.
 + Response 200
   [User][]
 
-### Delete a User [DELETE]
-Removal of the user with an Id
-
-+ Response 204
 
 # Group Visits 
 Every resource related with the Visits
@@ -181,25 +253,26 @@ Every resource related with the Visits
 ## Visit [/visits/{visit_id}]
 The users do visits to the participants houses. The resource visit has the next fields:
 
-  + id_visit: 1(number,required) - Visit Id
-  + id_Sheet: 1(number,required) - Sheet Id
-  + id_user: 1(number,required) - Id of user who is goint to do or update the sheet  
-  + date: 2018/04/04 (string, required) - Date when the visit is done
-  + state: pendient(string,required) - State of the visit(pendient, incomplete, done) 
+name | example_value | kind_value | requiered | description
+--:| ---- | --- | --- | --- 
+id|1|number|required|Visit Id
+sheet_id|1|number|true|Sheet Id
+user_id|1|number|true|Id of user who is goint to do or update the sheet  
+date|2018/04/04|string|true|Date when the visit is done
+state|pendient|string|true|State of the visit(pendient, incomplete, done) --:| ---- | --- | --- | --- 
+
+
+
 
 + Parameters
   + visit_id: 1 (number,required) - ID of the visit
 
-+ Attributes(object)
-  + id_visit: 1(number,required) - Visit Id
-  + id_Sheet: 1(number,required) - Sheet Id
-  + id_user: 1(number,required) - Id of user who is goint to do or update the sheet  
-  + date: 2018/04/04 (string, required) - Date when the visit is done
-  + state: pendient(string,required) - State of the visit(pendient, incomplete, done) 
++ Attributes(VisitStructure)
 
-+ Model (application/hal+json)
 
-    HAL+JSON representation of Visit Resource.
++ Model (application/json)
+
+    JSON representation of Visit Resource.
 
     + Headers
 
@@ -208,9 +281,9 @@ The users do visits to the participants houses. The resource visit has the next 
     + Body
 
             {
-              "id_visit": 1,
-              "id_Sheet": 1,
-              "id_user": 1,
+              "id": 1,
+              "sheet_id": 1,
+              "user_id": 1,
               "date": "2018/04/04",
               "state": "pendient"
             }
@@ -234,26 +307,31 @@ Retrieve a user with the given id
 
     [Visit][]
 
+### Delete a Visit [DELETE]
+Removal of a visit
+
++ Response 204
+
 ## Visit Collection [/visits{?filter}]
 
 A resource representing all of my Visitis in the system.
 
-+ Attributes(array[Visit])
++ Attributes(VisitsStructure)
 
-+ Model (application/hal+json)
++ Model (application/json)
 
-    HAL+JSON representation of Visit Collection Resource.
+    JSON representation of Visit Collection Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
     + Body
 
             [
               {
-                "id_visit": 1,
-                "id_Sheet": 1,
-                "id_user": 1,
+                "id": 1,
+                "sheet_id": 1,
+                "user_id": 1,
                 "date": "2018/04/04",
                 "state": "pendient"
               }
@@ -274,9 +352,8 @@ Creates a new User.
 + Request (application/json)
 
         {
-          "id_visit": 1,
-          "id_Sheet": 1,
-          "id_user": 1,
+          "sheet_id": 1,
+          "user_id": 1,
           "date": "2018/04/04",
           "state": "pendient"
         }
@@ -284,48 +361,47 @@ Creates a new User.
 + Response 200
   [Visit][]
 
-### Delete a User [DELETE]
-+ Response 204
 
-
-
+# Group States
 
 ## State [/states/{state_id}]
+The are in some fields of the sheets Those save historical fields. The resource State has the next fields:
+
+name | example_value | kind_value | requiered | description
+--:| ---- | --- | --- | --- 
+id|4|number|true|Id of the current state
+prev_state|3|number|true|Id of the previous value
+id|4|number|true|Id of the current state
+value|{"name":"Angel Mary"}|any|true|Any kind of variable
+timestamp| Wed Feb 28 2018 17:02:43 GMT+0100|string|true|Date of record data
+user_id| 3|number|true|Id of the user who modify the field
 
 + Parameters
   + state_id: 1 (number,required) - ID of the object
 
-+ Attributes (object)
-  + prev_state: 3(number, required) - Id of the previous value
-  + id_state: 4(number,required) - Id of the current state
-  + current_value (object,required) - Object with the current info
-    + diagnsose: Autism(string,required) - Disagnose
-    + start_year: 1993(number,required) - Diagnoise year 
-  + timestamp: 2018/04/04 (string,required) - Date of record data
-  + id_user: 3(number, required) - Id of the user who modify the field
++ Attributes (StateStruct)
 
-+ Model (application/hal+json)
 
-    HAL+JSON representation of Visit Resource.
++ Model (application/json)
+
+    JSON representation of Visit Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
 
     + Body
 
             {
+              "id": 4,
               "prev_state":2,
-              "id_state": 4,
-              "current_value":
-                [
-                  {
-                    "diagnsose": "Autism",
-                    "start_year": 1993
-                  }
-                ],
+              "value":
+              {
+                "diagnsose": "Autism",
+                "start_year": 1993
+              },
               "timestamp": "2018/04/04",
-              "id_user": 3, 
+              "user_id": 3, 
             }
 
 ### View State Details [GET]
@@ -340,7 +416,7 @@ Retrieve a state with the given id
 + Request (application/json)
 
         {
-            "current_value": 
+            "value": 
               {
                 "diagnsose": "Down's Syndrome",
                 "start_year": 1993
@@ -350,44 +426,48 @@ Retrieve a state with the given id
 + Response 200
 
             {
+              "id": 4,
               "prev_state": 3,
-              "id_state": 4,
-              "current_value": 
+              "value": 
                 {
                   "diagnsose": "Down's Syndrome",
                   "start_year": 1993
                 },
               "timestamp": "2018/04/04",
-              "id_user": 3, 
+              "user_id": 3, 
             }
+
+### Delete a State [DELETE]
+Removal of a state
++ Response 204 
 
 ## State Collection [/states{?filter}]
 
 A resource representing all of my States in the system.
 
-+ Attributes(array[State])
++ Attributes(StatesStruct)
 
-+ Model (application/hal+json)
++ Model (application/json)
 
-    HAL+JSON representation of State Collection Resource.
+    JSON representation of State Collection Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
     + Body
 
             [
               {
+                "id": 4,
                 "prev_state": 3,
-                "id_state": 4,
-                "current_value":
+                "value":
                   {
                     "diagnsose": "Autism",
                     "start_year": 1993
                   },
                 "timestamp": "2018/04/04",
-                "id_user": 3, 
-                "id_sheet": 2
+                "user_id": 3, 
+                "sheet_id": 2
               }
             ]
 
@@ -395,7 +475,7 @@ A resource representing all of my States in the system.
 Return a list of your states
 
 + Parameters
-  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'id_sheet':1}
+  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'sheet_id':1}
 
 + Response 200
   [State Collection][]
@@ -406,70 +486,73 @@ Creates a new State.
 + Request (application/json)
 
         {
+          "id": 4,
           "prev_state": 3,
-          "id_state": 4,
-          "current_value":
+          "id": 4,
+          "value":
             {
               "diagnsose": "Autism",
               "start_year": 1993
             },
           "timestamp": "2018/04/04",
-          "id_user": 3, 
-          "id_sheet": 2
+          "user_id": 3, 
+          "sheet_id": 2
         }
 + Response 200
   [State][]
 
-### Delete a State [DELETE]
-+ Response 204
 
+# Group Sheets
 
 ## Sheet [/sheets/{sheet_id}]
+The information of every participant will be store in sheets. The resource Sheet has the next fields:
+
+name | example_value | kind_value | requiered | description
+--:| ---- | --- | --- | --- 
+id|1|number|required|Sheet ID
+name|Carlos|string|required|Name of the participant
+first_surname| Vilchez |string|required|Participant first surname
+second_surname| Orlandini|string|false|Participant second surname
+bthday| 1993/04/21|string|false|Participant birthday
+dni| 702076478x |string|false| Participant DNI
+zone|Chiclayo|string|required|Zona where the participant is living
+address| Pueblo Joven 4 de Noviembre 23, |string|required| Participant address
+family_fotos|url1,url2|array[State]|false| List of State Object pointing to the urls family photos
+house_photos|url1,url2|array[State]|false| List of State Object pointing to the urls house photos
+responsible|State|array[State]|false|List of State Object with the responsible information
+family_information|State|array[State]|false| List of State Object with family information
+center|State|array[State]|false|List of State Object with the center information
+therapies|State|array[State]|false|List of State Object with therapy information
+social_situation|State|array[State]|false| List of State Object with sovial situation information 
+medical_info|State|array[State]|false|List of State Object with medical information
+home_info|State|array[State]|false| List of State Object with house information
+economic_info|State|array[State]|false|  List of State Object with economical information
+general_information|State|array[State]|false | List of State Object with general information
+manifested_information|State|array[State]|false| List of State Object with manifested informationf
+detected_information|State|array[State]|false| List of State Object with detected information
+warning_information|State|array[State]|false| List of State Object with warning information
+complete|false|boolean|required|false if the sheet requires further attention to fill the information
+
 
 + Parameters
   + sheet_id: 1 (number,required) - ID of the sheet
 
 + Attributes(object)
-  + id_sheet: 1 (number, required)
-  + name: Carlos (string,required)
-  + first_surname: Vilchez (string,required)
-  + second_surname: Orlandini (string,required)
-  + bthday: 1993/04/21 (string,required)
-  + dni: 702076478x (string,required)
-  + zone: Chiclayo (string,required)
-  + address: Pueblo Joven 4 de Noviembre 23, Chiclayo (string,required) - Participant address
-
-  + family_fotos (array[State]) - List of State Object
-  + house_photos  (array[State]) - Array of State Object
-  + responsible (array[State]) - Array of State object
-  + family_information (array[State]) - Array of State object  
-  + center (array[State]) - Array of Status Object. School
-  + therapies(array[State]) - Array of State object  
-  + social_situation (array[State]) - Array of State object  
-  + medical_info (array[State]) - Array of State object 
-  + home_info (array[State]) - Array of State object 
-  + economic_info (array[State]) - Array of State object 
-  + general_information (array[State]) - Array of State object 
-  + manifested_information (array[State]) - Array of State object 
-  + detected_information (array[State]) - Array of State object 
-  + warning_information (array[State]) - Array of State object 
-
-  + complete: false (string, required) - false if the sheet requires further attention to fill the information
 
 
 
 
-+ Model (application/hal+json)
++ Model (application/json)
 
-    HAL+JSON representation of Sheet Resource.
+    JSON representation of Sheet Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
     + Body
 
             {  
-              "id_sheet":1,
+              "id":1,
               "name":"Carlos",
               "first_surname":"Vilchez",
               "second_surname":"Orlandini",
@@ -480,8 +563,8 @@ Creates a new State.
               "family_fotos":[  
                 {  
                   "prev_state":null,
-                  "id_state":1,
-                  "current_value":{  
+                  "state_id":1,
+                  "value":{  
                     "urls":[  
                       "<url1>",
                       "<url2>"
@@ -489,14 +572,14 @@ Creates a new State.
                     "time":"2018/04/02"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "family_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":2,
-                  "current_value":[  
+                  "state_id":2,
+                  "value":[  
                     {  
                       "name":"Noelia",
                       "first_surname":"Perez",
@@ -509,52 +592,52 @@ Creates a new State.
                     }
                   ],
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "center":[  
                 {  
                   "prev_state":null,
-                  "id_state":3,
-                  "current_value":{  
+                  "state_id":3,
+                  "value":{  
                     "start_year":2015,
                     "name":"Angel Mary",
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 },
                 {  
                   "prev_state":3,
-                  "id_state": 21,
-                  "current_value":{  
+                  "state_id": 21,
+                  "value":{  
                     "start_year":2017,
                     "name":"Katuwira",
                     "observations":""
                   },
                   "timestamp":"2018/10/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "therapies":[  
                 {  
                   "prev_state":null,
-                  "id_state": 4,
-                  "current_value":{  
+                  "state_id": 4,
+                  "value":{  
                     "center":"AFAPED",
                     "start_year":2016,
                     "asistance":"Perfect",
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "social_situation":[  
                 {  
                   "prev_state":null,
-                  "id_state":5,
-                  "current_value":{  
+                  "state_id":5,
+                  "value":{  
                     "free_time":"Football",
                     "minders":"mother",
                     "close_support":"grandmother",
@@ -562,91 +645,91 @@ Creates a new State.
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "medical_info":{  
                 "diagnose":[  
                   {  
                     "prev_state":null,
-                    "id_state":6,
-                    "current_value":{  
+                    "state_id":6,
+                    "value":{  
                       "diagnsose":"Autism",
                       "start_year":1996
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "mobility":[  
                   {  
                     "prev_state":null,
-                    "id_state":7,
-                    "current_value":{  
+                    "state_id":7,
+                    "value":{  
                       "movements":"Little tasks",
                       "wheelchair":"no",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "comunication":[  
                   {  
                     "prev_state":null,
-                    "id_state":8,
-                    "current_value":{  
+                    "state_id":8,
+                    "value":{  
                       "level":"A few words"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "tests":[  
                   {  
                     "prev_state":null,
-                    "id_state":9,
-                    "current_value":{  
+                    "state_id":9,
+                    "value":{  
                       "name":"Tac",
                       "year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "treatment":[  
                   {  
                     "prev_state":null,
-                    "id_state":10,
-                    "current_value":{  
+                    "state_id":10,
+                    "value":{  
                       "name":"Vitamains",
                       "year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "relative_disease":[  
                   {  
                     "prev_state":null,
-                    "id_state":11,
-                    "current_value":{  
+                    "state_id":11,
+                    "value":{  
                       "name":"Altheimer",
                       "relation":"Father",
                       "observations":"He has to eat C Vitamins every day"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ]
               },
               "home_info":[  
                 {  
                   "prev_state":null,
-                  "id_state":12,
-                  "current_value":{  
+                  "state_id":12,
+                  "value":{  
                     "own_rent":"rent",
                     "material":"Adobe",
                     "facilities":[  
@@ -661,102 +744,102 @@ Creates a new State.
                     "observations":"They have a holl in one wall"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "helps":{  
                 "familiar_income":[  
                   {  
                     "prev_state":null,
-                    "id_state":13,
-                    "current_value":{  
+                    "state_id":13,
+                    "value":{  
                       "amount":1000,
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "external_support":[  
                   {  
                     "prev_state":null,
-                    "id_state":14,
-                    "current_value":{  
+                    "state_id":14,
+                    "value":{  
                       "name":"Altheimer",
                       "relation":"Father",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "feeding_center":[  
                   {  
                     "prev_state":null,
-                    "id_state":15,
-                    "current_value":{  
+                    "state_id":15,
+                    "value":{  
                       "name":"Nuestra guia",
                       "start_year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "others":[  
                   {  
                     "prev_state":null,
-                    "id_state":16,
-                    "current_value":{  
+                    "state_id":16,
+                    "value":{  
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ]
               },
               "general_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":17,
-                  "current_value":{  
+                  "state_id":17,
+                  "value":{  
                     "message":"Carlos is geting better and better"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "manifested_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":18,
-                  "current_value":{  
+                  "state_id":18,
+                  "value":{  
                     "message":"The mother needs a work "
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "detected_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":19,
-                  "current_value":{  
+                  "state_id":19,
+                  "value":{  
                     "message":"Carlos need more language therapy"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "warning_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":20,
-                  "current_value":{  
+                  "state_id":20,
+                  "value":{  
                     "message":"Language therapy!"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "complete": false
@@ -781,7 +864,9 @@ Retrieve a sheet with the given id
 + Response 200
   [Sheet][]
 
-
+### Delete a Sheet [DELETE]
+Removal of a Sheet
++ Response 204
 
 ## Sheet Collection [/sheets{?filter}]
 
@@ -789,19 +874,19 @@ A resource representing all of my Sheets in the system.
 
 + Attributes(array[Sheet])
 
-+ Model (application/hal+json)
++ Model (application/json)
 
-    HAL+JSON representation of State Collection Resource.
+    JSON representation of State Collection Resource.
 
     + Headers
 
-            Authentication: <user_token>
+            Authentication: <user_token> - To have acces to this resource the user has to be identified 
     + Body
 
             [
 
               {  
-                "id_sheet":1,
+                "id":1,
                 "name":"Carlos",
                 "first_surname":"Vilchez",
                 "second_surname":"Orlandini",
@@ -812,8 +897,8 @@ A resource representing all of my Sheets in the system.
                 "family_fotos":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "urls":[  
                         "<url1>",
                         "<url2>"
@@ -821,14 +906,14 @@ A resource representing all of my Sheets in the system.
                       "time":"2018/04/02"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "family_information":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":[  
+                    "state_id":4,
+                    "value":[  
                       {  
                         "name":"Noelia",
                         "first_surname":"Perez",
@@ -841,52 +926,52 @@ A resource representing all of my Sheets in the system.
                       }
                     ],
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "center":[  
                   {  
                     "prev_state":null,
-                    "id_state":3,
-                    "current_value":{  
+                    "state_id":3,
+                    "value":{  
                       "start_year":2015,
                       "name":"Angel Mary",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   },
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "start_year":2017,
                       "name":"Katuwira",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "therapies":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "center":"AFAPED",
                       "start_year":2016,
                       "asistance":"Perfect",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "social_situation":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "free_time":"Football",
                       "minders":"mother",
                       "close_support":"grandmother",
@@ -894,91 +979,91 @@ A resource representing all of my Sheets in the system.
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "medical_info":{  
                   "diagnose":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "diagnsose":"Autism",
                         "start_year":1996
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "mobility":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "movements":"Little tasks",
                         "wheelchair":"no",
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "comunication":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "level":"A few words"
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "tests":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "name":"Tac",
                         "year":"2017",
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "treatment":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "name":"Vitamains",
                         "year":"2017",
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "relative_disease":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "name":"Altheimer",
                         "relation":"Father",
                         "observations":"He has to eat C Vitamins every day"
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ]
                 },
                 "home_info":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "own_rent":"rent",
                       "material":"Adobe",
                       "facilities":[  
@@ -993,102 +1078,102 @@ A resource representing all of my Sheets in the system.
                       "observations":"They have a holl in one wall"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "helps":{  
                   "familiar_income":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "amount":1000,
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "external_support":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "name":"Altheimer",
                         "relation":"Father",
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "feeding_center":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "name":"Nuestra guia",
                         "start_year":"2017",
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ],
                   "others":[  
                     {  
                       "prev_state":null,
-                      "id_state":4,
-                      "current_value":{  
+                      "state_id":4,
+                      "value":{  
                         "observations":""
                       },
                       "timestamp":"2018/04/04",
-                      "id_user":3
+                      "user_id":3
                     }
                   ]
                 },
                 "general_information":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "message":"Carlos is geting better and better"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "manifested_information":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "message":"The mother needs a work "
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "detected_information":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "message":"Carlos need more language therapy"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "warning_information":[  
                   {  
                     "prev_state":3,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "message":"Language therapy!"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "pendig":"yes"
@@ -1100,7 +1185,7 @@ A resource representing all of my Sheets in the system.
 Return a list of your sheet
 
 + Parameters
-  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are goinf to use. Originaly this filter is {'zone':'Chiclayo'}
+  + filter: "%7B%E2%80%98zone%E2%80%99%3A%E2%80%98Chiclayo%E2%80%99%7D" (string, optional) - Different filters we are going to use. Originaly this filter is {'zone':'Chiclayo'}
 
 + Response 200
   [Sheet Collection][]
@@ -1111,7 +1196,6 @@ Creates a new Sheet.
 + Request (application/json)
 
             {  
-              "id_sheet":1,
               "name":"Carlos",
               "first_surname":"Vilchez",
               "second_surname":"Orlandini",
@@ -1122,8 +1206,8 @@ Creates a new Sheet.
               "family_fotos":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "urls":[  
                       "<url1>",
                       "<url2>"
@@ -1131,14 +1215,14 @@ Creates a new Sheet.
                     "time":"2018/04/02"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "family_information":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":[  
+                  "state_id":4,
+                  "value":[  
                     {  
                       "name":"Noelia",
                       "first_surname":"Perez",
@@ -1151,52 +1235,52 @@ Creates a new Sheet.
                     }
                   ],
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "center":[  
                 {  
                   "prev_state":null,
-                  "id_state":3,
-                  "current_value":{  
+                  "state_id":3,
+                  "value":{  
                     "start_year":2015,
                     "name":"Angel Mary",
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 },
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "start_year":2017,
                     "name":"Katuwira",
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "therapies":[  
                 {  
                   "prev_state":null,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "center":"AFAPED",
                     "start_year":2016,
                     "asistance":"Perfect",
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "social_situation":[  
                 {  
                   "prev_state":null,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "free_time":"Football",
                     "minders":"mother",
                     "close_support":"grandmother",
@@ -1204,91 +1288,91 @@ Creates a new Sheet.
                     "observations":""
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "medical_info":{  
                 "diagnose":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "diagnsose":"Autism",
                       "start_year":1996
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "mobility":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "movements":"Little tasks",
                       "wheelchair":"no",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "comunication":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "level":"A few words"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "tests":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "name":"Tac",
                       "year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "treatment":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "name":"Vitamains",
                       "year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "relative_disease":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "name":"Altheimer",
                       "relation":"Father",
                       "observations":"He has to eat C Vitamins every day"
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ]
               },
               "home_info":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "own_rent":"rent",
                     "material":"Adobe",
                     "facilities":[  
@@ -1303,111 +1387,107 @@ Creates a new Sheet.
                     "observations":"They have a holl in one wall"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "helps":{  
                 "familiar_income":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "amount":1000,
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "external_support":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "name":"Altheimer",
                       "relation":"Father",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "feeding_center":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "name":"Nuestra guia",
                       "start_year":"2017",
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ],
                 "others":[  
                   {  
                     "prev_state":null,
-                    "id_state":4,
-                    "current_value":{  
+                    "state_id":4,
+                    "value":{  
                       "observations":""
                     },
                     "timestamp":"2018/04/04",
-                    "id_user":3
+                    "user_id":3
                   }
                 ]
               },
               "general_information":[  
                 {  
                   "prev_state":null,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "message":"Carlos is geting better and better"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "manifested_information":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "message":"The mother needs a work "
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "detected_information":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "message":"Carlos need more language therapy"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "warning_information":[  
                 {  
                   "prev_state":3,
-                  "id_state":4,
-                  "current_value":{  
+                  "state_id":4,
+                  "value":{  
                     "message":"Language therapy!"
                   },
                   "timestamp":"2018/04/04",
-                  "id_user":3
+                  "user_id":3
                 }
               ],
               "pendig":"yes"
             }
 
-
-
 + Response 200
   [Sheet][]
 
-### Delete a State [DELETE]
-+ Response 204
